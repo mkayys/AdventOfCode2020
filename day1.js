@@ -24,14 +24,18 @@ function reportRepair(data){
   let hash = {};
 
   for(let i = 0; i < arr.length; i ++ ){
-    let num = Number[arr[i]];
-    
+    let num = Number(arr[i]);
+    let diff = 2020 - num; 
+ 
+    if(hash[diff]) {
+      return num * diff; 
+    } else {
+      hash[num] = true;
+    }
   }
+} 
 
-}
-
-
-// console.log(reportRepair(data))
+console.log(reportRepair(data))
 
 // Part 2
 
@@ -53,4 +57,7 @@ function reportRepairAgain(data) {
     }
 }
 
-console.log(reportRepairAgain(data));
+// console.log(reportRepairAgain(data));
+
+
+[3,3,3], 9 

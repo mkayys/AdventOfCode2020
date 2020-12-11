@@ -1,16 +1,27 @@
 const fs = require("fs");
 
-const data = fs.readFileSync("./day2_julia.txt", { encoding: "utf8" });
+let data = fs.readFileSync("./day2_julia.txt", { encoding: "utf8" });
 
 data = data.split("\n"); 
 
-// el = [ "13-14 f: ffff " ]
-let start;
-let end; 
-let letter; 
-for(let i = 0; i < el.length; i ++ ){
-  let currString = el[i]; 
-  for(let j = 0; j < currString.length; j ++ ){
-    
+function validPW(data){
+  let total = 0;
+
+  // el = [ "13-14 f: ffff " ]
+  for (let i = 0; i < data.length; i++) {
+    let currString = data[i];
+    let lines = currString.split(" "); //[ ["13-14"], ["f:"], ["ffff"]]
+    let range = lines[0].split("-");
+    let letter = lines[1][0];
+    let count = 0;
+      for(let j = 0; j < lines[2].length; j ++ ){
+        if(lines[2][j] === letter) count ++;
+      }
+
+    if (count <= Number(range[1]) && count >= Number(range[0])) total++;
   }
+  return total; 
 }
+
+console.log(validPW(data));
+
